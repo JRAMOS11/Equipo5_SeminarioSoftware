@@ -94,7 +94,7 @@ switch ($page) {
         break;
 
     case "materia_nueva":
-        require_once __DIR__ . "/src/views/templates/materias/materia_nueva.view.tpl";
+        require_once __DIR__ . "/src/views/templates/materias/materias_form.view.tpl";
         break;
 
     // Calificaciones
