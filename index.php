@@ -102,6 +102,16 @@ case "maestro_guardar":
     require_once __DIR__ . "/src/controllers/MaestrosController.php";
     \Controllers\MaestrosController::guardar();
     break;
+    
+    //matriculas
+    case "matriculas":
+    include_once "src/views/templates/matriculas/matriculas.view.tpl";
+    break;
+
+    case "matricula_nueva":
+    include_once "src/views/templates/matriculas/matriculas_form.view.tpl";
+    break;
+    
     // Materias
     case "materias":
         require_once __DIR__ . "/src/views/templates/materias/materias.view.tpl";

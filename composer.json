@@ -1,15 +1,15 @@
 {
-    "name": "jasielhp/nweb",
-    "description": "Sistema web para seguimiento academico desarrollado en PHP Y Mysql",
+    "name": "michellerodriguez/equipo5",
+    "description": "seguimiento academico",
     "autoload": {
         "psr-4": {
-            "Jasielhp\\Nweb\\": "src/"
+            "Michellerodriguez\\Equipo5\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "JRAMOS11",
-            "email": "davidjasiel11@icloud.com"
+            "name": "Sumii016",
+            "email": "michellerodriguezm016@gmail.com"
         }
     ],
     "require": {}
