@@ -5,7 +5,15 @@ error_reporting(E_ALL);
 
 session_start();
 
+// Include RoleMiddleware for access control
+require_once __DIR__ . "/src/utilities/RoleMiddleware.php";
+
 $page = $_GET["page"] ?? "login";
+
+// Check access control for all pages except login and register
+if ($page !== "login" && $page !== "register") {
+    \Utilities\RoleMiddleware::checkAccess($page);
+}
 
 switch ($page) {
 
@@ -68,6 +76,11 @@ switch ($page) {
      // Home
     case "home":
         require_once __DIR__ . "/src/views/templates/home.view.tpl";
+        break;
+
+    // Dashboard
+    case "dashboard":
+        require_once __DIR__ . "/src/views/templates/dashboard/dashboard.view.tpl";
         break;
       
      
