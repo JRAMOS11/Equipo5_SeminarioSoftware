@@ -15,6 +15,47 @@ if (!$estudiante) {
 
 $idEstudiante = $estudiante["id_estudiante"];
 
+
+if ($estudiante["carrera"] == "Sin asignar") {
+?>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Seleccione su carrera
+        </div>
+
+        <div class="card-body">
+            <p>Antes de continuar con su matrícula debe seleccionar la carrera a la que pertenece.</p>
+
+            <form method="POST" action="index.php?page=actualizar_carrera">
+
+                <div class="mb-3">
+                    <label class="form-label">Carrera</label>
+
+                    <select name="carrera" class="form-control" required>
+                        <option value="">Seleccione una carrera</option>
+                        <option value="Ingeniería en Sistemas">Ingeniería en Sistemas</option>
+                        <option value="Administración de Empresas">Administración de Empresas</option>
+                        <option value="Derecho">Derecho</option>
+                        <option value="Enfermería">Enfermería</option>
+                        <option value="Psicología">Psicología</option>
+                        <option value="Contaduría">Contaduría</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Guardar Carrera
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php
+    exit();
+}
+
 if (($_GET["accion"] ?? "") === "inscribir" && isset($_GET["id_materia"])) {
     \Dao\MisMateriasDao::inscribirMateria($idEstudiante, intval($_GET["id_materia"]));
     header("Location: index.php?page=mis_materias");

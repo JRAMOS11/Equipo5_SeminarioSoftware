@@ -145,5 +145,22 @@ class EstudianteDao extends Table
             "id_usuario" => $id_usuario
         ), $conn);
     }
+    public static function actualizarCarreraPorCorreo($correo, $carrera)
+{
+    $sqlstr = "
+        UPDATE estudiantes e
+        INNER JOIN usuarios u
+            ON e.id_usuario = u.id_usuario
+        SET e.carrera = :carrera
+        WHERE u.correo = :correo
+    ";
+
+    $params = array(
+        "correo" => $correo,
+        "carrera" => $carrera
+    );
+
+    return self::executeNonQuery($sqlstr, $params);
+}
 }
 ?>

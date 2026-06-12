@@ -8,14 +8,20 @@ require_once __DIR__ . "/Table.php";
 class MisMateriasDao extends Table
 {
     public static function obtenerEstudiantePorCorreo($correo)
-    {
-        $sqlstr = "SELECT e.id_estudiante, u.nombre, u.correo
-                   FROM estudiantes e
-                   INNER JOIN usuarios u ON e.id_usuario = u.id_usuario
-                   WHERE u.correo = :correo";
+{
+    $sqlstr = "SELECT e.id_estudiante,
+                      e.carrera,
+                      u.nombre,
+                      u.correo
+               FROM estudiantes e
+               INNER JOIN usuarios u
+                   ON e.id_usuario = u.id_usuario
+               WHERE u.correo = :correo";
 
-        return self::obtenerUnRegistro($sqlstr, ["correo" => $correo]);
-    }
+    return self::obtenerUnRegistro($sqlstr, [
+        "correo" => $correo
+    ]);
+}
 
     public static function obtenerMateriasInscritas($idEstudiante)
     {

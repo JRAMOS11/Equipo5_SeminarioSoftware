@@ -7,20 +7,42 @@ require_once __DIR__ . "/Table.php";
 
 class UsuarioDao extends Table
 {
-    public static function registrarUsuario($nombre, $correo, $password, $idRol)
-    {
-        $sqlstr = "INSERT INTO usuarios (nombre, correo, password, id_rol, estado)
-                   VALUES (:nombre, :correo, :password, :id_rol, 'activo')";
+   public static function registrarUsuario($nombre, $correo, $password, $idRol)
+{
+    $sqlstr = "INSERT INTO usuarios (nombre, correo, password, id_rol, estado)
+               VALUES (:nombre, :correo, :password, :id_rol, 'activo')";
 
-        $params = array(
-            "nombre" => $nombre,
-            "correo" => $correo,
-            "password" => password_hash($password, PASSWORD_DEFAULT),
-            "id_rol" => intval($idRol)
-        );
+    $params = array(
+        "nombre" => $nombre,
+        "correo" => $correo,
+        "password" => password_hash($password, PASSWORD_DEFAULT),
+        "id_rol" => intval($idRol)
+    );
 
-        return self::executeNonQuery($sqlstr, $params);
-    }
+    self::executeNonQuery($sqlstr, $params);
+
+    $usuario = self::obtenerUnRegistro(
+        "SELECT id_usuario FROM usuarios WHERE correo = :correo",
+        array("correo" => $correo)
+    );
+
+    return intval($usuario["id_usuario"]);
+}
+
+    public static function registrarEstudianteDesdeUsuario($idUsuario, $cuenta, $carrera, $telefono)
+{
+    $sqlstr = "INSERT INTO estudiantes (id_usuario, cuenta, carrera, telefono)
+               VALUES (:id_usuario, :cuenta, :carrera, :telefono)";
+
+    $params = array(
+        "id_usuario" => $idUsuario,
+        "cuenta" => $cuenta,
+        "carrera" => $carrera,
+        "telefono" => $telefono
+    );
+
+    return self::executeNonQuery($sqlstr, $params);
+   }
 
     public static function existeCorreo($correo)
     {

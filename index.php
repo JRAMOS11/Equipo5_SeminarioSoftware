@@ -7,6 +7,10 @@ session_start();
 
 // Include RoleMiddleware for access control
 require_once __DIR__ . "/src/utilities/RoleMiddleware.php";
+ require_once __DIR__ . "/src/dao/UsuarioDao.php";
+        require_once __DIR__ . "/src/dao/EstudianteDao.php";
+        require_once __DIR__ . "/src/dao/MisMateriasDao.php";
+
 
 $page = $_GET["page"] ?? "login";
 
@@ -46,6 +50,7 @@ switch ($page) {
     case "register":
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once __DIR__ . "/src/dao/UsuarioDao.php";
+       
 
         $nombre = $_POST["nombre"];
         $correo = $_POST["correo"];
@@ -67,10 +72,23 @@ switch ($page) {
             exit();
         }
 
-        \Dao\UsuarioDao::registrarUsuario($nombre, $correo, $password, $rol);
+        $idUsuario = \Dao\UsuarioDao::registrarUsuario($nombre, $correo, $password, $rol);
 
-        echo "<script>alert('Usuario registrado correctamente'); window.location='index.php?page=login';</script>";
-        exit();
+         if (intval($rol) === 3) {
+         $cuenta = "EST-" . str_pad($idUsuario, 3, "0", STR_PAD_LEFT);
+          $carrera = "Sin asignar";
+          $telefono = "";
+
+              \Dao\UsuarioDao::registrarEstudianteDesdeUsuario(
+              $idUsuario,
+              $cuenta,
+              $carrera,
+              $telefono
+    );
+}
+
+echo "<script>alert('Usuario registrado correctamente'); window.location='index.php?page=login';</script>";
+exit();
     }
 
     require_once __DIR__ . "/src/views/templates/auth/register.view.tpl";
@@ -80,6 +98,17 @@ switch ($page) {
         session_destroy();
         header("Location: index.php?page=login");
         exit();
+    case "actualizar_carrera":
+
+    \Dao\EstudianteDao::actualizarCarreraPorCorreo(
+        $_SESSION["correo"],
+        $_POST["carrera"]
+    );
+
+    header("Location: index.php?page=mis_materias");
+    exit();
+
+break;    
 
      // Home
     case "home":

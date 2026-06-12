@@ -94,6 +94,7 @@ class RoleMiddleware
     "mis_materias",
 
     "matriculas_nueva",
+    "actualizar_carrera",
     
 
     "calificaciones",
