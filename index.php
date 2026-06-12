@@ -51,7 +51,15 @@ switch ($page) {
         $correo = $_POST["correo"];
         $password = $_POST["password"];
         $rol = $_POST["rol"];
-
+        
+        // Validar que solo pueda existir un Director en el sistema
+          if (intval($rol) === 1 && \Dao\UsuarioDao::existeDirector()) {
+           echo "<script>
+            alert('Ya existe un Director registrado. No se puede crear otro Director.');
+            window.location='index.php?page=register';
+          </script>";
+            exit();
+         }
         $existe = \Dao\UsuarioDao::existeCorreo($correo);
 
         if ($existe) {
@@ -126,6 +134,10 @@ case "maestro_guardar":
     case "materias":
         require_once __DIR__ . "/src/views/templates/materias/materias.view.tpl";
         break;
+        
+    case "mis_materias":
+    require_once __DIR__ . "/src/views/templates/estudiantes/mis_materias.view.tpl";
+    break;
 
     case "materia_nueva":
         require_once __DIR__ . "/src/views/templates/materias/materias_form.view.tpl";

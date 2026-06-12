@@ -155,5 +155,16 @@ class UsuarioDao extends Table
 
     return self::obtenerRegistros($sqlstr, array());
 }
+public static function existeDirector()
+{
+    $sqlstr = "SELECT COUNT(*) AS total
+               FROM usuarios u
+               INNER JOIN roles r ON u.id_rol = r.id_rol
+               WHERE r.nombre_rol = 'director'";
+
+    $resultado = self::obtenerUnRegistro($sqlstr, array());
+
+    return intval($resultado["total"] ?? 0) > 0;
+}
 }
 ?>

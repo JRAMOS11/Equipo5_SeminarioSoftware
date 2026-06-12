@@ -27,19 +27,46 @@ class RoleMiddleware
             "director" => array(
     "home",
     "dashboard",
+
     "estudiantes",
+    "estudiante_nuevo",
+    "estudiante_guardar",
+    "estudiante_editar",
+    "estudiante_eliminar",
+
     "maestros",
     "maestro_nuevo",
+    "maestro_guardar",
+    "maestro_editar",
+    "maestro_eliminar",
+
     "materias",
     "materia_nueva",
+    "materia_guardar",
+    "materia_editar",
+    "materia_eliminar",
+
     "matriculas",
     "matricula_nueva",
+    "matricula_guardar",
     "matricula_editar",
+    "matricula_eliminar",
+
     "calificaciones",
+    "calificacion_nueva",
+    "calificacion_guardar",
+    "calificacion_editar",
+    "calificacion_eliminar",
+
     "reportes",
+
     "usuarios",
     "usuario_nuevo",
+    "usuario_guardar",
     "usuario_editar",
+    "usuario_eliminar",
+
+    "mis_materias",
     "logout"
 ),
             "maestro" => array(
@@ -64,8 +91,10 @@ class RoleMiddleware
     "dashboard",
 
     "materias",
+    "mis_materias",
 
-    "matriculas",
+    "matriculas_nueva",
+    
 
     "calificaciones",
 

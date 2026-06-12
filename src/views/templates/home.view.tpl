@@ -168,6 +168,12 @@ body{
         <a href="index.php?page=usuarios">Entrar</a>
     </div>
 
+    <div class="card">
+    <h3>Mis Materias</h3>
+    <p>Inscripción y consulta de materias del estudiante.</p>
+    <a href="index.php?page=mis_materias" class="btn">Entrar</a>
+    </div>
+
 </section>
 
 <footer class="footer">
